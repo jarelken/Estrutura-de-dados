@@ -1,0 +1,55 @@
+package ex4;
+import java.util.Scanner;
+
+public class Ex4 {
+    int vetorG[] = new int[13];
+    Apostador vetApostador[] = new Apostador[100];
+    int somador = 0;
+    int vetR[] = new int[13];
+    int ultimo = 0;
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        Ex4 vet = new Ex4();
+        System.out.println("Digite os valores do Gabarito(13 valores de 1~3)");
+        for (int i = 0; i < vet.vetorG.length; i++) {
+            vet.vetorG[i]=scan.nextInt();  
+        }
+        int j = 0;
+        while (true){
+            System.out.println("Deseja adicionar apostador? (1 para sim/0 para não)");
+            int resp = scan.nextInt();
+            if (resp == 0) {
+                break;   
+            }else{
+                if(resp != 1){
+                    System.out.println("Favor digitar 1 para sim e 0 para não!");
+                }else{
+                    System.out.println("Digite o número do cartão do apostador: ");
+                    int cart = scan.nextInt();
+                    vet.somador=0;
+                    for (int i = 0; i < vet.vetorG.length; i++) {
+                        System.out.println("Digite os valores de resposta do apostador(13 valores de 1~13)");
+                        vet.vetR[i] = scan.nextInt();
+                        if(vet.vetR[i] == vet.vetorG[i]){
+                            vet.somador++;
+                        }
+                    }
+                    vet.insere(new Apostador(cart, vet.vetR));
+                    System.out.println("Apostador adicionado!");
+                    System.out.printf("Número do cartão: %d\n",vet.vetApostador[j].numeroC);
+                    System.out.printf("Número de acertos: %d\n",vet.somador);
+                    j++;
+                    if(vet.somador==13){
+                        System.out.println("GANHADOR, PARABÉNS");
+                    }   
+                }    
+            }
+        }
+    }
+    public void insere(Apostador p){
+        if(ultimo < vetApostador.length){
+            vetApostador[ultimo] = p;
+            ultimo++;
+        }
+    }
+}
