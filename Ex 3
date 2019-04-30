@@ -1,0 +1,26 @@
+package ex3;
+import java.util.Scanner;
+
+
+public class Ex3 {
+    int vetor[] = new int[20];
+    int guarda = 0;
+    
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        Ex3 vet = new Ex3();
+        for (int i = 0; i < vet.vetor.length; i++) {
+            vet.vetor[i] = scan.nextInt();
+        }
+        for (int i = 0; i < vet.vetor.length/2; i++) {
+            vet.guarda = vet.vetor[i];
+            vet.vetor[i] = vet.vetor[vet.vetor.length-1-i];
+            vet.vetor[vet.vetor.length-1-i] = vet.guarda;
+        }
+        for (int i = 0; i < vet.vetor.length; i++) {
+            System.out.print(vet.vetor[i]+" - ");
+            
+        }
+    }
+    
+}
