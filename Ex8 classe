@@ -1,0 +1,14 @@
+package ex8;
+
+
+public class Funcionario {
+   String nome;
+   int codigo;
+   double salarioMensal;
+   
+   public Funcionario(String n, int cod, double sal){
+       nome = n;
+       codigo = cod;
+       salarioMensal = sal;
+   }
+}
