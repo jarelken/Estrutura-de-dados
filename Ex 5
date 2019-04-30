@@ -1,0 +1,49 @@
+package ex5;
+import java.util.Scanner;
+
+public class Ex5 {
+
+    int matrizM[][] = new int [5][5];
+    int somaA = 0;
+    int somaB = 0;
+    int somaC = 0;
+    int somaD = 0;
+    int somaE = 0;
+    
+    public static void main(String[] args) {
+        Ex5 mat = new Ex5();
+        Scanner scan = new Scanner(System.in);
+        for (int i = 0; i < 5; i++) {
+            for(int j = 0; j < 5;j++) {
+                System.out.printf("Matriz[%d][%d]: ",i+1,j+1);
+                mat.matrizM[i][j] = scan.nextInt();
+                mat.somaE+=mat.matrizM[i][j];
+                
+                if(i == 3){
+                    mat.somaA+=mat.matrizM[i][j];
+                }
+                if(j == 1){
+                    mat.somaB+=mat.matrizM[i][j];
+                }
+                if(i==j){
+                    mat.somaC+=mat.matrizM[i][j];
+                }
+                if(i==5-1-j){
+                    mat.somaD+=mat.matrizM[i][j];
+                }
+            }
+        }
+        System.out.printf("Soma da linha 4: [%d]",mat.somaA);
+        System.out.printf("\nSoma da coluna 2: [%d]",mat.somaB);
+        System.out.printf("\nSoma da diagonal principal: [%d]",mat.somaC);
+        System.out.printf("\nSoma da diagonal secundária: [%d]",mat.somaD);
+        System.out.printf("\nSoma de todos elementos: [%d]",mat.somaE);
+        System.out.println("\n\nMatriz M: ");
+        for (int i = 0; i < 5; i++) {
+            System.out.println("");
+            for (int j = 0; j < 5; j++) {
+                System.out.print("  "+mat.matrizM[i][j]);   
+            }   
+        }
+    }   
+}
