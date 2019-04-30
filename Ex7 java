@@ -1,0 +1,114 @@
+package ex7;
+import java.util.Scanner;
+
+
+public class Ex7 {
+    Conta vetConta[] = new Conta[10];
+    int ultimo = 0;
+    int menu = 0;
+    float sal = -1;
+    int cadastro = 0;
+    
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        Ex7 v = new Ex7();
+        while(true){
+            System.out.println("1-Cadastrar: \n2-Depositar: \n3-Retirar: \n4-Usuários \n5-Sair: ");
+            v.menu = scan.nextInt();
+            if(v.menu==5){
+                break; 
+            }
+            if(v.menu==1){
+                System.out.println("Digite o nome: ");
+                String nome = scan.next();
+                System.out.println("Digite o número da conta: ");
+                int numeroConta = scan.nextInt();
+                System.out.println("Digite o número da agência: ");
+                int numeroAgencia = scan.nextInt();
+                System.out.println("Digite o saldo inicial: ");
+                float saldo = scan.nextFloat();
+                v.Cadastrar(new Conta(nome,numeroConta,numeroAgencia,saldo));
+                v.cadastro++;
+            }
+            if(v.menu == 2){
+                if(v.cadastro==0){
+                    System.out.println("Realize um cadastro primeiro!");
+                }else{
+                    System.out.println("Digite o número da conta para depósito: ");
+                    int num = scan.nextInt();
+                    for (int i = 0; i < v.vetConta.length; i++) {
+                        if(num==v.vetConta[i].numeroConta){
+                            System.out.println("Digite o valor do depósito: ");
+                            float dep = scan.nextFloat();
+                            v.sal=v.Depositar(num, dep);
+                            System.out.printf("Saldo: R$%.2f\n", v.sal);
+                            break;
+                        }else{
+                            System.out.println("Número de conta inválido!");
+                            break;
+                        }
+                    }
+                }
+            }
+            if(v.menu == 3){
+                if(v.cadastro==0){
+                    System.out.println("Realize um cadastro primeiro! ");
+                }else{
+                    System.out.println("Digite o número da conta para retirar: ");
+                    int num = scan.nextInt();
+                    for (int i = 0; i < v.vetConta.length; i++) {
+                        if(num==v.vetConta[i].numeroConta){
+                            System.out.println("Digite o valor a ser retirado: ");
+                            float ret = scan.nextFloat();
+                            v.sal=v.Retirar(num, ret);
+                            System.out.printf("Saldo: R$%.2f\n", v.sal);
+                            break;
+                        }else{
+                            System.out.println("Número de conta inválido!");
+                            break;
+                        }
+                    }
+                }
+            }
+            if(v.menu == 4){
+                if(v.cadastro==0){
+                    System.out.println("Realize um cadastro primeiro!");
+                }else{
+                    for (int i = 0; i < v.ultimo; i++) {
+                        System.out.println(v.vetConta[i].nomeTitular);
+                    }
+                }
+            }
+            if(v.menu<0 || v.menu>5){
+                System.out.println("Número inválido!");
+            }
+        }
+        System.out.println("Concluído!");
+    }
+    public void Cadastrar(Conta a){
+        if (ultimo<vetConta.length){
+            vetConta[ultimo]= a;
+            ultimo++;
+        }
+    }
+    public float Depositar(int n, float v){
+        for (int i = 0; i < vetConta.length; i++) {
+            if (vetConta[i].numeroConta == n) {
+                vetConta[i].saldoConta += v;
+                float saldo = vetConta[i].saldoConta;
+                return saldo;
+            }
+        }
+        return -1;
+    }
+    public float Retirar(int n, float v){
+        for (int i = 0; i < vetConta.length; i++) {
+            if (vetConta[i].numeroConta == n) {
+                vetConta[i].saldoConta -= v;
+                float saldo = vetConta[i].saldoConta;
+                return saldo;
+            }
+        }
+        return -1;
+    }
+}
