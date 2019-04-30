@@ -1,0 +1,14 @@
+package ex4;
+
+
+public class Apostador {
+    int numeroC;
+    int vetorR[] = new int[13];
+    
+    public Apostador(int numC, int[] vet){
+        numeroC=numC;
+        for (int i = 0; i < vetorR.length; i++) {
+            vetorR[i]= vet[i];           
+        }
+    }
+}
