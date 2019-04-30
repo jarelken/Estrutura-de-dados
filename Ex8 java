@@ -1,0 +1,36 @@
+package ex8;
+import java.util.Scanner;
+
+
+public class FuncionarioTeste {
+    Funcionario f[] = new Funcionario[2];
+    int ultimo = 0;
+    
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        FuncionarioTeste vet = new FuncionarioTeste();
+        for (int i = 0; i < vet.f.length; i++) {
+            System.out.println("Nome funcionário: ");
+            String n = scan.next();
+            System.out.println("Código funcionário: ");
+            int cod =scan.nextInt();
+            System.out.println("Salário mensal: ");
+            double sal=scan.nextDouble();
+            vet.f[i]=(new Funcionario(n,cod,sal));
+        }
+        for (int i = 0; i < vet.f.length; i++) {
+            double sal = vet.SalarioA(vet.f[i].salarioMensal);
+            double rea = vet.Reajuste(sal);
+            System.out.println(vet.f[i].nome+" Anual - R$"+sal);
+            System.out.println("Valor com reajuste de 10%: "+ rea);   
+        }
+    }
+    public double SalarioA(double s){
+        double salario = s*12;
+        return salario;
+    }
+    public double Reajuste(double s){
+        double reajuste = s + (s*0.1);
+        return reajuste;
+    }
+}
