@@ -7,11 +7,11 @@ public class Ex9 {
     public void insere(int a){
         if (inicio==-1){
             inicio = 0;
-            fim = 0;
-            lista[fim]=a;
-        }else if(fim+1<lista.length){
+            fim = 1;
+            lista[fim-1]=a;
+        }else if(fim<lista.length){
             fim++;
-            lista[fim]=a;
+            lista[fim-1]=a;
         }else{
             System.out.println("Lista cheia");
         }
@@ -31,7 +31,7 @@ public class Ex9 {
     public void remove(int b){
         int rem = busca(b);
         if(rem!=-1){
-            for (int i = rem; i < fim; i++) {
+            for (int i = rem; i < fim-1; i++) {
                 lista[i]=lista[i+1];
             }
             fim--;
@@ -58,7 +58,7 @@ public class Ex9 {
         l.insere(9);
         l.insere(5);
         l.insere(7);
-        for (int i = 0; i <= l.fim; i++) {
+        for (int i = 0; i < l.fim; i++) {
             System.out.println(l.lista[i]);
             
         }
