@@ -42,7 +42,6 @@ public class Ex9 {
         fim=-1;
     }
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
         Ex9 l = new Ex9();
         l.insere(2);
         l.insere(3);
