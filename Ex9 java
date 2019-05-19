@@ -1,6 +1,6 @@
 package ex9;
 public class Ex9 {
-    int lista[] = new int[10];
+    int lista[] = new int[9];
     int inicio = -1;
     int fim = -1;
     
