@@ -1,0 +1,68 @@
+package ex9;
+public class Ex9 {
+    int lista[] = new int[10];
+    int inicio = -1;
+    int fim = -1;
+    
+    public void insere(int a){
+        if (inicio==-1){
+            inicio = 0;
+            fim = 0;
+            lista[fim]=a;
+        }else if(fim+1<lista.length){
+            fim++;
+            lista[fim]=a;
+        }else{
+            System.out.println("Lista cheia");
+        }
+    }
+    public int busca(int b){
+        if(inicio==-1){
+            return -1;
+        }else{
+            for (int i = inicio; i <=fim; i++) {
+                if(lista[i]==b){
+                    return i;
+                }
+            }
+        return -1;
+        }
+    }
+    public void remove(int b){
+        int rem = busca(b);
+        if(rem!=-1){
+            for (int i = rem; i < fim; i++) {
+                lista[i]=lista[i+1];
+            }
+            fim--;
+        }
+    }
+    public void limpalista(){
+        inicio=-1;
+        fim=-1;
+    }
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        Ex9 l = new Ex9();
+        l.insere(2);
+        l.insere(3);
+        l.insere(6);
+        l.insere(7);
+        l.insere(8);
+        l.insere(1);
+        l.insere(15);
+        l.remove(3);
+        l.insere(4);
+        l.remove(7);
+        l.limpalista();
+        l.insere(10);
+        l.insere(9);
+        l.insere(5);
+        l.insere(7);
+        for (int i = 0; i <= l.fim; i++) {
+            System.out.println(l.lista[i]);
+            
+        }
+    }
+    
+}
