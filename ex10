@@ -1,0 +1,152 @@
+package teste;
+import java.util.Scanner;
+
+public class Ex10 {
+    
+    No lista[] = new No[50];
+    
+    ListaCompras b = new ListaCompras();
+    
+    public static void main(String []args){
+        Scanner scan = new Scanner(System.in);
+        Ex10 a = new Ex10();
+        while (true){
+            System.out.println("1.Adicionar produto;\n2.Buscar produto;\n3.Remover produto;\n4.Imprimir lista de produtos;\n5.Imprimir valor total;\n6.Limpar a lista;\n7.Sair:");
+            int menu = scan.nextInt();
+            if(menu==7){
+                //sair
+                break;
+            }else if(menu==1){
+                //insere
+                System.out.println("Nome:");
+                String n = scan.next();
+                System.out.println("Valor:");
+                double v = scan.nextDouble();
+                System.out.println("Quantidade:");
+                int q = scan.nextInt();
+                
+                Produto p = a.new Produto(n, v, q);
+                No c = a.new No(p);
+                a.b.insere(c);
+                
+            }else if(menu==2){
+                //busca
+                System.out.println("Digite o nome do produto para buscar:");
+                String n = scan.next();
+                if(a.b.busca(n)!= null){
+                    System.out.println("Produto na lista: "+a.b.busca(n).toString());
+                }else{
+                    System.out.println("Produto não encontrado!");
+                }
+                
+            }else if(menu==3){
+                //remove
+                System.out.println("Digite o nome do produto para remover:");
+                String n = scan.next();
+                a.b.remove(n);
+            }else if(menu==4){
+                //imprime
+                a.b.imprimeLista();
+            }else if(menu==5){
+                //valor total
+                System.out.println("Valor total: R$"+a.b.calculoTotal());
+            }else if(menu==6){
+                //limpalista
+                a.b.limpalista();
+            }
+        }
+    }
+    
+    public class No{
+        Produto p;
+        public No(Produto n){
+            p=n;
+        }
+        public String toString(){
+            return "Produto:"+p.nome+" Valor:"+p.valor+" Quantidade:"+p.quantidade;
+        }
+            
+    }
+    
+    public class Produto{
+        String nome;
+        double valor;
+        int quantidade;
+        public Produto(String n, double v, int q){
+            nome = n;
+            valor = v;
+            quantidade = q;
+        }
+    }
+    
+    public abstract class ListaEstatica {
+
+        public int prim;
+        public int ultimo;
+
+        abstract public void insere(No n);
+
+        abstract public void limpalista();
+
+        abstract public No busca(String s);
+
+        abstract public void remove(String r);
+
+        abstract public void imprimeLista();
+    }
+    
+    public class ListaCompras extends ListaEstatica{
+        
+        @Override
+        public void insere(No n) {
+            if(ultimo<lista.length){
+                lista[ultimo]= n;
+                ultimo++;
+            }else{
+                System.out.println("Lista cheia!");
+            }
+        }
+        
+        @Override
+        public void limpalista() {
+            prim = 0;
+            ultimo = 0;
+        }
+
+        @Override
+        public No busca(String s) {
+            for (int i = 0; i < ultimo; i++) {
+                if(lista[i].toString().contains(s))
+                    return lista[i];
+            }
+            return null;
+        }
+
+        @Override
+        public void remove(String r) {
+            for (int i = 0; i < ultimo; i++) {
+                if(busca(r).equals(lista[i])){
+                    lista[i]=lista[i+1];
+                    ultimo--;
+                }
+                
+            }
+        }
+
+        @Override
+        public void imprimeLista() {
+            for (int i = 0; i < ultimo; i++) {
+                System.out.println(lista[i].toString());
+                
+            }
+        }
+        public double calculoTotal(){
+            double total = 0;
+            for (int i = 0; i < ultimo; i++) {
+                total+=lista[i].p.valor*lista[i].p.quantidade;
+            }
+            return total;
+        }
+        
+    }
+}
